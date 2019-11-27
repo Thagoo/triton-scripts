@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  compile:
+    docker:
+      - image: thagoo/triton-script:latest
+    steps:
+      - run: apt-get -y update && apt-get -y upgrade
+      - run: git clone https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 -b tr-10-caf triton
+      - run: wget https://raw.githubusercontent.com/Thagoo/triton-script/tr/build.sh
+      - run: chmod +x build.sh
+      - run: bash build.sh
+
+workflows:
+  version: 2
+  cooking:
+    jobs:
+      - compile
