@@ -64,16 +64,15 @@ apt-get update -qq && \
 	zip \
 	zlib1g-dev \
 	zstd
-	
+
+git clone -b tr-10-caf https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 triton && cd triton
 git clone https://github.com/Thagoo/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.0 tc
-git clone https://github.com/Thagoo/AnyKernel3 
+git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER=Thago
-export KBUILD_BUILD_HOST=DroneCI
-export CID=
-export TOKEN=
+export KBUILD_BUILD_HOST=Thago@CIRCLECI
 export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
 make mrproper
 mkdir -p out
