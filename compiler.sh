@@ -65,7 +65,7 @@ apt-get update -qq && \
 	zlib1g-dev \
 	zstd
 
-git clone -b tr-10-caf https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 triton && cd triton
+git clone -b tr-caf-new https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 triton && cd triton
 git clone https://github.com/Thagoo/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.0 tc
 git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
@@ -77,12 +77,12 @@ export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
 make mrproper
 mkdir -p out
 make O=out rolex_defconfig
-make O=out -j52 -l52
+make O=out -j$(nproc --all) -l$(nproc --all)
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
 cd AnyKernel3
-zip -r Triton-Atmosphere.zip *
+zip -r Triton-Reunified.zip *
 
-curl -F document=@Triton-Atmosphere.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
+curl -F document=@Triton-Reunified.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
