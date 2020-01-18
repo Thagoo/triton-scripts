@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Asia/Kolkata
+export TIME=$(date +"%S-%F")
+export ZIPNAME=Triton-Reunified-${TIME}
 ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 dpkg-reconfigure --frontend noninteractive tzdata
 
@@ -65,7 +67,7 @@ apt-get update -qq && \
 	zlib1g-dev \
 	zstd
 
-git clone -b tr-caf-new https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 triton && cd triton
+git clone --depth=1 -j$(nproc --all) -b tr-caf-new https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 triton && cd triton
 git clone https://github.com/Thagoo/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.0 tc
 git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
@@ -78,11 +80,19 @@ make mrproper
 mkdir -p out
 make O=out rolex_defconfig
 make O=out -j$(nproc --all) -l$(nproc --all)
+if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
+        curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CID" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="error"
+        exit 1
+    fi
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
 cd AnyKernel3
-zip -r Triton-Reunified.zip *
+zip -r ${ZIPNAME}.zip *
 
-curl -F document=@Triton-Reunified.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
+curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
