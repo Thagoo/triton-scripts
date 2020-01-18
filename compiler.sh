@@ -77,7 +77,7 @@ export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
 make mrproper
 mkdir -p out
 make O=out rolex_defconfig
-make O=out -j52 -l52
+make O=out -j$(nproc --all) -l$(nproc --all)
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
 cd AnyKernel3
 zip -r Triton-Reunified.zip *
