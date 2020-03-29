@@ -67,7 +67,7 @@ apt-get update -qq && \
 	zlib1g-dev \
 	zstd
 
-git clone --depth=1 -j$(nproc --all) -b tr-10-caf https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 --single-branch triton && cd triton
+git clone --depth=1 -j$(nproc --all) -b tr-eas https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 --single-branch triton && cd triton
 git clone https://github.com/Thagoo/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.0 tc
 git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
