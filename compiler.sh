@@ -79,6 +79,11 @@ make mrproper
 mkdir -p out
 make O=out rolex_defconfig
 make O=out -j$(nproc --all) -l$(nproc --all) | tee log.txt
+curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CID" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="build started"
 if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
    curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
