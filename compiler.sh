@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Asia/Kolkata
 export TIME=$(date +"%S-%F")
-export ZIPNAME=Triton-Ebella-${TIME}
+export ZIPNAME=Triton-Atmosphere-${TIME}
 ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 dpkg-reconfigure --frontend noninteractive tzdata
 apt-get install -y tzdata
