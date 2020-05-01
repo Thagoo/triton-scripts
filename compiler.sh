@@ -78,7 +78,7 @@ export KBUILD_BUILD_USER=Thago
 export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
 make mrproper
 mkdir -p out
-make O=out rolex_defconfig
+make O=out msm8917-perf_defconfig
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CID" \
         -d "disable_web_page_preview=true" \
