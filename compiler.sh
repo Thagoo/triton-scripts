@@ -101,7 +101,7 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="follow @tboxxx for more updates"
+	-F caption="#triton #atmosphere follow @tboxxx for more updates"
 
 
 
