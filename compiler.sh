@@ -1,107 +1,39 @@
 #! /usr/bin/env bash
-
-export DEBIAN_FRONTEND=noninteractive
-export TZ=Asia/Kolkata
-export TIME=$(date +"%S-%F")
-export ZIPNAME=Triton-Nethunter-${TIME}
-ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
-apt-get install -y tzdata
-apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y \
-	autoconf \
-	autogen \
-	automake \
-	autotools-dev \
-	bc \
-	binutils \
-	binutils-aarch64-linux-gnu \
-	binutils-arm-linux-gnueabi \
-	bison \
-	bzip2 \
-	ca-certificates \
-	coreutils \
-	cmake \
-	curl \
-	expect \
-	flex \
-	g++ \
-	gawk \
-	gcc \
-	git \
-	gnupg \
-	gperf \
-	help2man \
-	lftp \
-	libc6-dev \
-	libelf-dev \
-	libgomp1-* \
-	liblz4-tool \
-	libncurses5-dev \
-	libssl-dev \
-	libstdc++6 \
-	libtool \
-	libtool-bin \
-	m4 \
-	make \
-	nano \
-	openjdk-8-jdk \
-	openssh-client \
-	openssl \
-	ovmf \
-	patch \
-	pigz \
-	python3 \
-	python \
-	rsync \
-	shtool \
-	subversion \
-	tar \
-	texinfo \
-	tzdata \
-	u-boot-tools \
-	unzip \
-	wget \
-	xz-utils \
-	zip \
-	zlib1g-dev \
-	zstd
-
-git clone --depth=1 -j$(nproc --all) -b nethunter https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 --single-branch triton && cd triton
-git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 tc --depth=1 --single-branch
-git clone https://github.com/Thagoo/AnyKernel3 -b kali
-echo cloning done
-export ARCH=arm64
-export SUBARCH=arm64
-export KBUILD_BUILD_USER=Thago
-export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
-make mrproper
-mkdir -p out
-make O=out rolex_defconfig
-curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-        -d chat_id="$CID" \
-        -d "disable_web_page_preview=true" \
-        -d "parse_mode=html" \
-        -d text="build started"
-make O=out -j$(nproc --all) -l$(nproc --all) | tee log.txt
-c
-if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
-   curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
+export DIRNAME=out/t*/p*/r*
+export ZIPNAME=PitchBlack*-UNOFFICIAL.zip
+git config --global color.ui false
+git config --global user.name Thagoo
+git config --global user.email "lohitgowda56@gmail.com"
+repo init -q -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0 --depth=1 
+repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) | tee sync.txt
+if ! [ -a build/env* ];then
+curl -F document=@sync.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
            exit 1
 fi
-cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
-cd AnyKernel3
-zip -r ${ZIPNAME}.zip *
-
-curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
-        -F chat_id=$CID\
+curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CID" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="synced sources successfully"
+git clone -b pbrp-android-9 --depth=1 https://github.com/Thagoo/recovery_device_xiaomi_rolex device/xiaomi/rolex
+export ALLOW_MISSING_DEPENDENCIES=true
+source build/envsetup.sh
+lunch omni_rolex-eng
+rm kernel/xiaomi/msm8917/Android.bp
+make -j$(nproc --all) recoveryimage | tee log.txt
+if ! [ -a out/target/product/rolex/*U*.zip ];then
+curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
+        -F chat_id=${CID} \
         -F "disable_web_page_preview=true" \
-        -F "parse_mode=html"  \
-	-F caption="#triton #nethunter follow @tboxxx for more updates"
-
-
-
+        -F "parse_mode=html" 
+           exit 1
+fi
+cd $DIRNAME
+curl -F document=@${ZIPNAME} "https://api.telegram.org/bot$tok/sendDocument" \
+        -F chat_id=$cid \
+        -F "disable_web_page_preview=true" \
+        -F "parse_mode=html" \
+        -F caption="#pitchblack #recovery follow @tboxxx for more updates"
