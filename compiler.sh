@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
 export DIRNAME=out/t*/p*/r*
-export ZIPNAME=PitchBlack*-UNOFFICIAL.zip
 git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
@@ -33,7 +32,9 @@ curl -F document=@log.txt "https://api.telegram.org/bot${tok}/sendDocument" \
            exit 1
 fi
 cd $DIRNAME
-curl -F document=@${ZIPNAME} "https://api.telegram.org/bot$tok/sendDocument" \
+export TIME=$(date +"%S-%F")
+mv Pitch*-UNOFFICIAL.zip PitchBlack-rolex-${TIME}-UNOFFICIAL.zip
+curl -F document=@PitchBlack-rolex-${TIME}-UNOFFICIAL.zip "https://api.telegram.org/bot$tok/sendDocument" \
         -F chat_id=$cid \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
