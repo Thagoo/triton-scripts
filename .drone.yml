@@ -10,8 +10,7 @@ steps:
             CID:
                     from_secret: cid
     commands:
-      - echo $TOKEN
       - apt-get update && apt-get upgrade -y
-      - chmod +x test.sh
-      - bash test.sh
+      - chmod +x compiler.sh
+      - bash compiler.sh
       
