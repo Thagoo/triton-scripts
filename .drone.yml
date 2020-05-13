@@ -3,12 +3,12 @@ name: triton
 
 steps:
   - name: Compile
-    image: ubuntu:latest
+    image: fr3akyphantom/droid-builder:latest
     environment:
-    TELEGRAM_TOKEN:
-      from_secret: TELEGRAM_TOKEN
-    TELEGRAM_CHAT:
-      from_secret: TELEGRAM_CHAT
+            TOKEN:
+      from_secret: TOKEN
+              CID:
+      from_secret: CID
     commands:
       - apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip wget
       - chmod +x build.sh
