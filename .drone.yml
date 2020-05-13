@@ -10,7 +10,7 @@ steps:
               CID:
       from_secret: CID
     commands:
-      - apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip wget
+      - apt-get update && apt-get upgrade -y
       - chmod +x build.sh
       - bash build.sh
       
