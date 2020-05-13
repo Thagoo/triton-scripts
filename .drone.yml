@@ -5,12 +5,13 @@ steps:
   - name: Compile
     image: fr3akyphantom/droid-builder:latest
     environment:
-    TOKEN:
-      from_secret: TOKEN
-    CID:
-      from_secret: CID
+            TOKEN:
+                    from_secret: token
+            CID:
+                    from_secret: cid
     commands:
+      - echo $TOKEN
       - apt-get update && apt-get upgrade -y
-      - chmod +x compiler.sh
-      - bash compiler.sh
+      - chmod +x test.sh
+      - bash test.sh
       

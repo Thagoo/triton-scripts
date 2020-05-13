@@ -25,7 +25,6 @@ curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d "parse_mode=html" \
         -d text="build started"
 make O=out -j$(nproc --all) -l$(nproc --all) | tee log.txt
-c
 if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
    curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
@@ -42,6 +41,4 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
 	-F caption="#triton #atmosphere follow @tboxxx for more updates"
-
-
 
