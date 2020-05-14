@@ -9,6 +9,10 @@ steps:
                     from_secret: token
             CID:
                     from_secret: cid
+            MEGAP:
+                    from_secret: megap
+            MEGAU:
+                    from_secret: megau
     commands:
       - apt-get update && apt-get upgrade -y
       - chmod +x compiler.sh
