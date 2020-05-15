@@ -21,7 +21,7 @@ curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d "parse_mode=html" \
         -d text="synced sources successfully"
 rm -rf device/xiaomi/rolex
-git clone -b pbrp-android-9 --depth=1 https://github.com/Thagoo/recovery_device_xiaomi_rolex device/xiaomi/rolex
+git clone -b test-wip --depth=1 https://github.com/Thagoo/recovery_device_xiaomi_rolex device/xiaomi/rolex 
 export ALLOW_MISSING_DEPENDENCIES=true
 source build/envsetup.sh
 lunch omni_rolex-eng
