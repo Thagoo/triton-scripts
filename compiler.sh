@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 export DIRNAME=out/t*/p*/r*
 TIME=$(date +"%S-%F")
-ZIPNAME=PitchBlack-rolex-${TIME}-UNOFFICIAL.zip
-sudo apt install -y megatools
+#ZIPNAME=PitchBlack-rolex-${TIME}-UNOFFICIAL.zip
+#sudo apt install -y megatools
 git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
-repo init -q -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0 --depth=1 
+repo init --depth=1 -q -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0-WIP
 repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) | tee sync.txt
 if ! [ -a build/env* ];then
 curl -F document=@sync.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
@@ -36,6 +36,11 @@ curl -F document=@log.txt "https://api.telegram.org/bot${tok}/sendDocument" \
            exit 1
 fi
 cd $DIRNAME
-mv Pitch*-UNOFFICIAL.zip $ZIPNAME
-megaput --username $MEGAU --password $MEGAP $ZIPNAME
+ls
+curl -F document=@recovery.img "https://api.telegram.org/bot${tok}/sendDocument" \
+        -F chat_id=${cid} \
+        -F "disable_web_page_preview=true" \
+        -F "parse_mode=html" 
+
+#megaput --username $MEGAU --password $MEGAP $ZIPNAME
 
