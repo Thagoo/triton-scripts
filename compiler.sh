@@ -28,17 +28,10 @@ lunch omni_rolex-eng
 rm kernel/xiaomi/msm8917/Android.bp
 rm -rf vendor/qcom/opensource/commonsys/cryptfs_hw
 make -j$(nproc --all) recoveryimage | tee log.txt
-if ! [ -a out/target/product/rolex/*U*.zip ];then
-curl -F document=@log.txt "https://api.telegram.org/bot${tok}/sendDocument" \
-        -F chat_id=${cid} \
-        -F "disable_web_page_preview=true" \
-        -F "parse_mode=html" 
-           exit 1
-fi
-cd $DIRNAME
+cd out/target/product/rolex
 ls
-curl -F document=@recovery.img "https://api.telegram.org/bot${tok}/sendDocument" \
-        -F chat_id=${cid} \
+curl -F document=@recovery.img "https://api.telegram.org/bot${TOKEN}/sendDocument" \
+        -F chat_id=${CID} \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
 
