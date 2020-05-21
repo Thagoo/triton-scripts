@@ -6,8 +6,8 @@ TIME=$(date +"%S-%F")
 git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
-repo init --depth=1 -q -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0-WIP
-repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) | tee sync.txt
+repo init --depth=1 -q -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
+repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) 
 if ! [ -a build/env* ];then
 curl -F document=@sync.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
