@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
+
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER=Thago
