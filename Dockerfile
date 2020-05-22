@@ -12,32 +12,27 @@ ENV \
     CCACHE_COMPRESS=1 \
     CCACHE_COMPRESSLEVEL=8 \
     CCACHE_DIR=/srv/ccache
+RUN sed 's/main$/main universe/' /etc/apt/sources.list 1>/dev/null
+
+RUN apt-get update               \
+ && apt-get -y -q upgrade        \
+ && apt-get -y -q install        \
+    bc                           \
+    binutils-arm-linux-gnueabihf \
+    build-essential              \
+    ccache                       \
+    git                          \
+    libncurses-dev               \
+    libssl-dev                   \
+    u-boot-tools                 \
+    wget                         \
+    xz-utils                     \
+    python \
+    python3 \
+    curl
+
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
-RUN sed 's/main$/main universe/' /etc/apt/sources.list 1>/dev/null
-RUN set -xe\
-    && apt -q -y \
-            git \
-            bc \
-            ccache \
-            ncurses5-libs \
-            bash \
-            moreutils \
-            automake \
-            autoconf \
-            gawk \
-            libtool \
-            zip \
-            curl \
-            wget \
-            gnupg \
-            python3 \
-            python3-dev \
-            unzip \
-            openjdk8 \
-            pigz \
-            tar \
-            build-base --no-cache
-RUN cd ~/
-    && git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth 1 --single-branch gcc
-    && git clone https://github.com/Thagoo/AnyKernel3 -b ta --depth 1 
+RUN git config --global http.sslVerify false
+RUN git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth 1 --single-branch /tmp/gcc
+RUN git clone https://github.com/Thagoo/AnyKernel3 --depth 1 /tmp/AnyKernel3
