@@ -9,13 +9,11 @@ dpkg-reconfigure --frontend noninteractive tzdata
 apt-get install -y tzdata
 
 git clone --depth=1 -j$(nproc --all) -b tr-10-caf https://github.com/Thagoo/Triton_kernel_xiaomi_msm8917 --single-branch triton && cd triton
-git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 tc
-git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER=Thago
-export CROSS_COMPILE=$(pwd)/tc/bin/aarch64-linux-android-
+export CROSS_COMPILE=$(pwd)/../gcc/bin/aarch64-linux-android-
 make mrproper
 mkdir -p out
 make O=out rolex_defconfig
@@ -33,7 +31,7 @@ if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
            exit 1
 fi
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
-cd AnyKernel3
+cd ../AnyKernel3
 zip -r ${ZIPNAME}.zip *
 
 curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \

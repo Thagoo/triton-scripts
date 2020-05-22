@@ -2,7 +2,7 @@ version: 2
 jobs:
   compile:
     docker:
-      - image: fr3akyphantom/droid-builder:latest
+            - image: thagoo/triton-scripts:latest
     steps:
       - run: apt-get -y update && apt-get -y upgrade
       - run: chmod +x compiler.sh
