@@ -5,6 +5,7 @@ jobs:
             - image: thagoo/triton-scripts:latest
     steps:
       - run: apt-get -y update && apt-get -y upgrade
+      - run: wget https://raw.githubusercontent.com/Thagoo/triton-scripts/ranchu-dump/extr.sh
       - run: chmod a+x extr.sh
       - run: bash extr.sh
 
