@@ -32,6 +32,10 @@ RUN apt-get update               \
     curl \
     zip
 
+RUN  apt install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller rename python-setuptools python python3
+RUN apt install -y liblzma-dev python-pip brotli python-lz4
+RUN pip install backports.lzma protobuf pycrypto pycryptodome docopt
+
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
