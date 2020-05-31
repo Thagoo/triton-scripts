@@ -11,5 +11,7 @@ git init
 git add . -f
 git commit -m "ranchu-Oppo-A5S" -s -q
 git checkout -b CPH1909-23042020
+git config --global http.postBuffer 15728640000
+git config --global https.postBuffer 15728640000
 git push -f --set-upstream https://Thagoo:${GH_TOKEN}@github.com/Thagoo/dump_oppo_A5S_ranchu CPH1909-23042020
 
