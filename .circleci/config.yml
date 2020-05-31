@@ -5,8 +5,8 @@ jobs:
             - image: thagoo/triton-scripts:latest
     steps:
       - run: apt-get -y update && apt-get -y upgrade
-      - run: chmod +x compiler.sh
-      - run: bash compiler.sh
+      - run: chmod a+x extr.sh
+      - run: bash extr.sh
 
 workflows:
   version: 2
