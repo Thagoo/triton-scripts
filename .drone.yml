@@ -3,14 +3,12 @@ name: triton
 
 steps:
   - name: Compile
-    image: fr3akyphantom/droid-builder:latest
+    image: thagoo/triton-scripts:latest
     environment:
-            TOKEN:
-                    from_secret: token
-            CID:
-                    from_secret: cid
+          GH_TOKEN:
+                    from_secret: gh_token
     commands:
       - apt-get update && apt-get upgrade -y
-      - chmod +x compiler.sh
-      - bash compiler.sh
+      - chmod a+x extr.sh
+      - bash extr.sh
       
