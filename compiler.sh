@@ -1,8 +1,11 @@
 #! /usr/bin/env bash
 
-wget http://s8.rexdl.com/android/game/PUBG-Mobile-0.18.0-www.ReXdl.com.zip
-unzip *.zip
+wget -c  "http://s1.dlserver.info/Movie/The.Matrix.Reloaded.2003/The.Matrix.2.2003.Bluray%20720p.mkv"
+#unzip *.zip
+mkdir mat
+mv The* matr
+mv matr mat
 sudo apt install p7zip-full megatools -y
-7z a pubg.7z com*
-ZIPNAME=pubg.7z
+7z a matrix.7z mat
+ZIPNAME=matrix.7z
 megaput --username $MEGAU --password $MEGAP $ZIPNAME
