@@ -5,7 +5,7 @@
 sudo apt install p7zip-full megatools ffmpeg libavcodec-extra -y
 
 megadl "https://mega.nz/#!drhh0aBC!ukoDkQx76xU1CzL2AHh6Lu-8PHQjS98fE87SmHU_9OQ"
-ffmpeg -i gg.mp4 -vf scale=-2:480 gg480.mp4
+ffmpeg -i gg.mp4 -vf scale=640:360 gg480.mp4
 mkdir gone
 mv gg480.mp4 gone
 7z a gonegirl.7z gone
