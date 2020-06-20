@@ -5,8 +5,8 @@
 sudo apt install p7zip-full megatools ffmpeg libavcodec-extra -y
 
 megadl "https://mega.nz/#!Yj4hyZ4D!QJoo7UreDctJbDup1DIiGRLEl9CFUr4RJs2QTYXPP4U"
-ffmpeg -i triangle.mp4 -vf scale=640:360 triangle480.mp4
+ffmpeg -i triangle.mp4 -vf scale=-1:360 triangle360.mp4
 #mkdir triangle
 #mv triangle480.mp4 triangle
 #7z a triangle.7z triangle
-megaput --username $MEGAU --password $MEGAP triangle480.mp4
+megaput --username $MEGAU --password $MEGAP triangle360.mp4
