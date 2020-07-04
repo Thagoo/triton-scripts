@@ -4,9 +4,11 @@
 #unzip *.zip
 sudo apt install p7zip-full megatools ffmpeg libavcodec-extra -y
 
-megadl "https://mega.nz/#!Yj4hyZ4D!QJoo7UreDctJbDup1DIiGRLEl9CFUr4RJs2QTYXPP4U"
-ffmpeg -i triangle.mp4 -vf scale=-1:360 triangle360.mp4
-#mkdir triangle
-#mv triangle480.mp4 triangle
-#7z a triangle.7z triangle
-megaput --username $MEGAU --password $MEGAP triangle360.mp4
+megadl "https://mega.nz/#!5yh2wCCI!9QhXF2Y2mwgPYtznIQALWUXXL_-wXr7PgBSjr958Z-0"
+mv Cap*
+capcivilwar.mp4
+ffmpeg -i capcivilwar.mp4 -vf scale=-1:360 triangle360.mp4
+#mkdir capcivilwar
+#mv capcivilwar480.mp4 triangle
+#7z a capcivilwar.7z triangle
+megaput --username $MEGAU --password $MEGAP capcivilwar360.mp4
