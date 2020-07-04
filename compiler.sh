@@ -5,8 +5,7 @@
 sudo apt install p7zip-full megatools ffmpeg libavcodec-extra -y
 
 megadl "https://mega.nz/#!5yh2wCCI!9QhXF2Y2mwgPYtznIQALWUXXL_-wXr7PgBSjr958Z-0"
-mv Cap*
-capcivilwar.mp4
+mv Cap* capcivilwar.mp4
 ffmpeg -i capcivilwar.mp4 -vf scale=-1:360 triangle360.mp4
 #mkdir capcivilwar
 #mv capcivilwar480.mp4 triangle
