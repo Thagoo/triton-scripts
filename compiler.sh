@@ -27,8 +27,7 @@ git clone -b trp --depth=1 https://github.com/Thagoo/recovery_device_xiaomi_role
 export ALLOW_MISSING_DEPENDENCIES=true
 source build/envsetup.sh
 lunch omni_rolex-eng
-rm -rf kernel/xiaomi/msm8917
-git clone https://github.com/Thagoo/platform_kernel_xiaomi_msm8917 -b tr-10-caf --single-branch --depth=1 kernel/xiaomi/msm8917
+git clone https://github.com/Thagoo/platform_kernel_xiaomi_msm8917 -b twrp --single-branch --depth=1 kernel/xiaomi/msm8917
 rm kernel/xiaomi/msm8917/Android.bp
 rm -rf vendor/qcom/opensource/commonsys/cryptfs_hw
 mka -j$(nproc --all) recoveryimage | tee log.txt
