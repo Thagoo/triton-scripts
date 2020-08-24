@@ -2,11 +2,13 @@
 export DIRNAME=out/t*/p*/r*
 TIME=$(date +"%S-%F")
 ZIPNAME=OrangeFox-R11.0-rolex-${TIME}-UNOFFICIAL.zip
-sudo apt install -y megatools
+sudo apt install -y megatools repo
 git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
-repo init --depth=1 -u -q https://gitlab.com/OrangeFox/Manifest.git -b fox
+mkdir ofrp
+cd ofrp
+repo init --depth=1 -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0 -q
 repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) | tee sync.txt
 if ! [ -a build/env* ];then
 curl -F document=@sync.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
@@ -26,7 +28,7 @@ export ALLOW_MISSING_DEPENDENCIES=true
 source build/envsetup.sh
 lunch omni_rolex-eng
 rm kernel/xiaomi/msm8917/Android.bp
-rm -rf vendor/qcom/opensource/commonsys/cryptfs_hw
+rm -rf device/qcom/common/cryptfs_hw
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 make -j$(nproc --all) recoveryimage | tee log.txt
 if ! [ -a out/target/product/rolex/*U*.zip ];then
@@ -39,7 +41,7 @@ fi
 cd $DIRNAME
 mv Orange*.zip $ZIPNAME
 #megaput --username $MEGAU --password $MEGAP $ZIPNAME
-curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
+curl -F document=@$ZIPNAME "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
