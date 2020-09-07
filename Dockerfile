@@ -1,39 +1,29 @@
-FROM ubuntu:bionic
+FROM python:3.7-alpine
 
-LABEL maintainer="Thagoo <lohitgowda56@gmail.com>"
-
-ENV \
-    DEBIAN_FRONTEND=noninteractive \
-    LANG=C.UTF-8 \
-    JAVA_OPTS=" -Xmx3840m " \
-    JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk-amd64 \
-    PATH=~/bin:/usr/local/bin:/home/builder/bin:$PATH \
-    USE_CCACHE=1 \
-    CCACHE_COMPRESS=1 \
-    CCACHE_COMPRESSLEVEL=8 \
-    CCACHE_DIR=/srv/ccache
-RUN sed 's/main$/main universe/' /etc/apt/sources.list 1>/dev/null
-
-RUN apt-get update               \
- && apt-get -y -q upgrade        \
- && apt-get -y -q install        \
-    bc                           \
-    binutils-arm-linux-gnueabihf \
-    build-essential              \
-    ccache                       \
-    git                          \
-    libncurses-dev               \
-    libssl-dev                   \
-    u-boot-tools                 \
-    wget                         \
-    xz-utils                     \
-    python \
-    python3 \
+RUN apk add --no-cache --update \
+    bash \
     curl \
-    zip
+    ffmpeg \
+    gcc \
+    git \
+    libffi-dev \
+    libjpeg \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    linux-headers \
+    musl \
+    musl-dev \
+    neofetch \
+    rsync \
+    zlib \
+    zlib-dev \
+    libxslt-dev \
+    libxml2-dev
 
-RUN git config --global user.name "Thagoo"
-RUN git config --global user.email "lohitgowda56@gmail.com"
-RUN git config --global http.sslVerify false
-RUN git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth 1 --single-branch /tmp/gcc
-RUN git clone https://github.com/Thagoo/AnyKernel3 --depth 1 /tmp/AnyKernel3
+WORKDIR /usr/src/app/Tbot
+
+RUN git clone https://github.com/Thagoo/Tbot2.git /usr/src/app/Tbot/ --depth=1
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-warn-script-location --no-cache-dir -r requirements.txt
+
+RUN rm -rf /var/cache/apk/* /tmp/* /usr/src/app/Tbot
