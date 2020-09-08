@@ -7,11 +7,8 @@ ENV \
     LANG=C.UTF-8 \
     JAVA_OPTS=" -Xmx3840m " \
     JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk-amd64 \
-    PATH=~/bin:/usr/local/bin:/home/builder/bin:$PATH \
-    USE_CCACHE=1 \
-    CCACHE_COMPRESS=1 \
-    CCACHE_COMPRESSLEVEL=8 \
-    CCACHE_DIR=/srv/ccache
+    PATH=~/bin:/usr/local/bin:/home/builder/bin:$PATH
+
 RUN sed 's/main$/main universe/' /etc/apt/sources.list 1>/dev/null
 
 RUN apt-get update               \
@@ -35,5 +32,5 @@ RUN apt-get update               \
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
-RUN git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth 1 --single-branch /tmp/gcc
+RUN git clone https://github.com/mrslezak/toolchains --depth 1 --single-branch /tmp/toolchains
 RUN git clone https://github.com/Thagoo/AnyKernel3 --depth 1 /tmp/AnyKernel3
