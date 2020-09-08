@@ -2,14 +2,13 @@
 
 ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
 
-make O=out ARCH=arm64 <defconfig>
+make O=out ARCH=arm64 rolex_defconfig
 
-PATH="/tmp/toolchains/Clang-11/bin:/tmp/toolchains/aarch64-linux-android-4.9/bin:/tmp/toolchains/arm32-gcc/bin:${PATH}" \
+PATH="/tmp/toolchains/bin:/tmp/toolchains/aarch64-linux-gnu/bin:/tmp/toolchains/arm-linux-gnuabi/bin:${PATH}" \
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
                       CC=clang \
-                      CLANG_TRIPLE=aarch64-linux-gnu- \
-                      CROSS_COMPILE=aarch64-linux-android- \
+                      CROSS_COMPILE=aarch64-linux-gnu- \
                       CROSS_COMPILE_ARM32=arm-linux-androideabi-
 
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
@@ -17,7 +16,6 @@ curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
         -d text="build started"
-make O=out -j$(nproc --all) -l$(nproc --all) | tee log.txt
 if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
    curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
