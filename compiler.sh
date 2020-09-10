@@ -10,7 +10,7 @@ make -j$(nproc --all) O=out \
                       CC=clang \
 		      CLANG_TRIPLE=aarch64-linux-gnu- \
                       CROSS_COMPILE=aarch64-linux-android- \
-                      CROSS_COMPILE_ARM32=arm-linux-androideabi
+                      CROSS_COMPILE_ARM32=arm-linux-androideabi-
 
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CID" \
