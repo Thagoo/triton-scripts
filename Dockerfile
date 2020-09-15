@@ -32,5 +32,6 @@ RUN apt-get update               \
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
-RUN git clone https://github.com/mrslezak/toolchains --depth 1 --single-branch /tmp/toolchains
+RUN git clone https://github.com/kdrag0n/proton-clang -b master --depth 1 --single-branch -q /tmp/toolchains
+RUN rm -rf /tmp/toolchains/.git
 RUN git clone https://github.com/Thagoo/AnyKernel3 --depth 1 /tmp/AnyKernel3
