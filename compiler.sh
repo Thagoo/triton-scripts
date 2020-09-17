@@ -1,8 +1,8 @@
-ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
+ZIPNAME=Triton-Storm-$(date +"%S-%F")
 
 make O=out ARCH=arm64 rolex_defconfig
 
-PATH="/tmp/toolchains/bin:/tmp/toolchains/aarch64-linux-gnu/bin:/tmp/toolchains/arm-linux-gnuabi/bin:${PATH}" \
+PATH="/tmp/proton/bin:/tmp/proton/aarch64-linux-gnu/bin:/tmp/proton/arm-linux-gnuabi/bin:${PATH}" \
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
                       CC=clang \
@@ -29,4 +29,4 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #atmosphere follow @tboxxx for more updates"
+	-F caption="#triton #storm#4.9 #proton #clang follow @tboxxx for more updates"
