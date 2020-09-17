@@ -32,5 +32,6 @@ RUN apt-get update               \
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
-RUN git clone https://github.com/mrslezak/toolchains --depth 1 --single-branch /tmp/toolchains
+RUN git clone https://github.com/stormbreaker-project/aarch64-linux-android-4.9 --depth=1 -q /tmp/gcc64
+RUN git clone https://github.com/stormbreaker-project/arm-linux-androideabi-4.9 --depth=1 -q /tmp/gcc32
 RUN git clone https://github.com/Thagoo/AnyKernel3 --depth 1 /tmp/AnyKernel3

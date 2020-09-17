@@ -3,7 +3,8 @@ ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER=Thago
-export CROSS_COMPILE=/tmp/gcc/bin/aarch64-linux-android-
+export CROSS_COMPILE=/tmp/gcc64/bin/aarch64-linux-android-
+export CROSS_COMPILE_ARM32=/tmp/gcc32/bin/arm-linux-androideabi-
 make mrproper
 mkdir -p out
 make O=out rolex_defconfig
