@@ -1,6 +1,6 @@
 #! /usr/bin/bash
-
-ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
+git clone https://github.com/Thagoo/AnyKernel3 --depth=1 -b staging AnyKernel3
+ZIPNAME=Triton-Ebella-Reborn-$(date +"%S-%F")
 PATH="/tmp/clang/bin:/tmp/gcc64/bin:/tmp/gcc32/bin:${PATH}"
 make O=out ARCH=arm64 rolex_defconfig
 make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi-
@@ -17,13 +17,14 @@ if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
         -F "parse_mode=html" 
            exit 1
 fi
-cp out/arch/arm64/boot/Image.gz-dtb /tmp/AnyKernel3
-cd /tmp/AnyKernel3
+
+cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
+cd AnyKernel3
 zip -r ${ZIPNAME}.zip *
 
 curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #atmosphere follow @tboxxx for more updates"
+	-F caption="#triton #Ebella follow @tboxxx for more updates"
 
