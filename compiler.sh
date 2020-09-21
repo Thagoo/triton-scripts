@@ -1,5 +1,9 @@
 #! /usr/bin/bash
 
+sudo apt install -y bc \
+	bison \
+	flex
+
 ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
 PATH="/tmp/clang/bin:/tmp/gcc64/bin:/tmp/gcc32/bin:${PATH}"
 make O=out ARCH=arm64 rolex_defconfig
