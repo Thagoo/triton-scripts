@@ -1,8 +1,8 @@
 ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
-
-sudo apt install -y bc \
-	bison \
+apt install -y bison \
 	flex
+#git clone https://github.com/akhilnarang/scripts --depth=1 ascr
+#bash ascr/setup/android_build_env.sh
 
 export ARCH=arm64
 export SUBARCH=arm64
