@@ -3,7 +3,7 @@ name: triton
 
 steps:
   - name: Compile
-    image: ubuntu:latest
+    image: thagoo/triton-recovery:latest
     environment:
             TOKEN:
                     from_secret: token

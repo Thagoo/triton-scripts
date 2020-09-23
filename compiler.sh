@@ -1,11 +1,5 @@
 #! /usr/bin/env bash
 apt install git curl sudo -y
-ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
-export DEBIAN_FRONTEND=noninteractive
-
-git clone https://github.com/akhilnarang/scripts
-dpkg-reconfigure --frontend noninteractive tzdata
-bash scripts/setup/android_build_env.sh
 export DIRNAME=out/t*/p*/r*
 TIME=$(date +"%S-%F")
 #ZIPNAME=PitchBlack-rolex-${TIME}-UNOFFICIAL.zip
