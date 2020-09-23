@@ -27,7 +27,7 @@ source build/envsetup.sh
 lunch omni_rolex-eng
 rm kernel/xiaomi/msm8917/Android.bp
 rm -rf vendor/qcom/opensource/commonsys/cryptfs_hw
-make -j$(nproc --all) recoveryimage | tee log.txt
+make -j$(nproc --all) recoveryimage
 cd out/target/product/rolex
 ls
 curl -F document=@recovery.img "https://api.telegram.org/bot${TOKEN}/sendDocument" \
