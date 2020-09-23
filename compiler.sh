@@ -1,4 +1,11 @@
 #! /usr/bin/env bash
+apt install git curl sudo -y
+ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
+export DEBIAN_FRONTEND=noninteractive
+
+git clone https://github.com/akhilnarang/scripts
+dpkg-reconfigure --frontend noninteractive tzdata
+bash scripts/setup/android_build_env.sh
 export DIRNAME=out/t*/p*/r*
 TIME=$(date +"%S-%F")
 #ZIPNAME=PitchBlack-rolex-${TIME}-UNOFFICIAL.zip
@@ -6,6 +13,7 @@ TIME=$(date +"%S-%F")
 git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
+mkdir twrp && cd twrp
 repo init --depth=1 -q -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
 repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) 
 if ! [ -a build/env* ];then

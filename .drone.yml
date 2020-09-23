@@ -3,7 +3,7 @@ name: triton
 
 steps:
   - name: Compile
-    image: thagoo/triton-scripts:latest
+    image: ubuntu:latest
     environment:
             TOKEN:
                     from_secret: token
@@ -14,7 +14,6 @@ steps:
             MEGAU:
                     from_secret: megau
     commands:
-      - apt-get update && apt-get upgrade -y
       - chmod +x compiler.sh
       - bash compiler.sh
       
