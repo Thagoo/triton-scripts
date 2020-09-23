@@ -3,7 +3,7 @@ name: triton
 
 steps:
   - name: Compile
-    image: fr3akyphantom/droid-builder:latest
+    image: thagoo/triton-scripts:latest
     environment:
             TOKEN:
                     from_secret: token
