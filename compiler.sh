@@ -4,7 +4,7 @@ sudo apt install -y bc \
 	bison \
 	flex
 
-ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
+ZIPNAME=Triton-Storm-$(date +"%S-%F")
 PATH="/tmp/clang/bin:/tmp/gcc64/bin:/tmp/gcc32/bin:${PATH}"
 make O=out ARCH=arm64 rolex_defconfig
 make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi-
@@ -29,5 +29,5 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #atmosphere follow @tboxxx for more updates"
+	-F caption="#triton #Storm #4.9 # clang follow @tboxxx for more updates"
 
