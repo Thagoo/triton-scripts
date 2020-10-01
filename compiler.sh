@@ -1,4 +1,4 @@
-ZIPNAME=Triton-Atmosphere-$(date +"%S-%F")
+ZIPNAME=Triton-Storm-$(date +"%S-%F")
 apt install -y bison \
 	flex
 #git clone https://github.com/akhilnarang/scripts --depth=1 ascr
@@ -33,5 +33,5 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #atmosphere follow @tboxxx for more updates"
+	-F caption="#triton #storm #4.9 follow @tboxxx for more updates"
 
