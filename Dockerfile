@@ -27,7 +27,10 @@ RUN apt-get update               \
     python \
     python3 \
     curl \
-    zip
+    zip \
+    flex \
+    bison \
+    bc
 
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
