@@ -2,18 +2,24 @@ ZIPNAME=Triton-Storm-$(date +"%S-%F")
 
 export ARCH=arm64
 export CC=clang
-export CROSS_COMPILE=/tmp/proton/bin/aarch64-linux-gnu-
-export CROSS_COMPILE_ARM32=/tmp/proton/bin/arm-linux-androideabi-
+export CROSS_COMPILE=/tmp/proton/aarch64-linux-gnu/bin/aarch64-linux-gnu-
+export CROSS_COMPILE_ARM32=/tmp/proton/arm-linux-gnueabi/bin/arm-linux-gnueabi-
 
 
 make O=out ARCH=arm64 rolex_defconfig
 
-PATH="/tmp/proton/bin:/tmp/proton/aarch64-linux-gnu/bin:/tmp/proton/arm-linux-gnuabi/bin:${PATH}" \
+PATH="/tmp/proton/bin:$PATH" \
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
                       CC=clang \
                       CROSS_COMPILE=aarch64-linux-gnu- \
-                      CROSS_COMPILE_ARM32=arm-linux-androideabi-
+                      CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+		      AR=llvm-ar \
+		      NM=llvm-nm \
+		      OBJCOPY=llvm-objcopy \
+		      OBJDUMP=llvm-objdump \
+		      STRIP=llvm-strip
+
 
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CID" \
@@ -35,4 +41,4 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #storm#4.9 #proton #clang follow @tboxxx for more updates"
+	-F caption="#triton #storm #4.9 #ALPHA compiled from Proton-Clang-v12 follow @tboxxx for more updates"
