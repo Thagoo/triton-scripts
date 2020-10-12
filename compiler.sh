@@ -1,10 +1,6 @@
 ZIPNAME=Triton-Storm-$(date +"%S-%F")
 
-export ARCH=arm64
-export CC=clang
-export CROSS_COMPILE=/tmp/proton/aarch64-linux-gnu/bin/aarch64-linux-gnu-
-export CROSS_COMPILE_ARM32=/tmp/proton/arm-linux-gnueabi/bin/arm-linux-gnueabi-
-
+mkdir -p out
 
 make O=out ARCH=arm64 rolex_defconfig
 
