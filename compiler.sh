@@ -14,12 +14,18 @@ make -j$(nproc --all) O=out \
                       CC=clang \
                       CROSS_COMPILE=aarch64-linux-gnu- \
                       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-		      AR=llvm-ar \
-		      NM=llvm-nm \
-		      OBJCOPY=llvm-objcopy \
-		      OBJDUMP=llvm-objdump \
-		      STRIP=llvm-strip
-
+                      AR=llvm-ar \
+                      NM=llvm-nm \
+	              LD=ld.lld \
+	              STRIP=llvm-strip \
+	              OBJCOPY=llvm-objcopy \
+	              OBJDUMP=llvm-objdump \
+	              OBJSIZE=llvm-size \
+	              READELF=llvm-readelf \
+	              HOSTCC=clang \
+	              HOSTCXX=clang++ \
+	              HOSTAR=llvm-ar \
+	              HOSTLD=ld.lld 
 
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CID" \
