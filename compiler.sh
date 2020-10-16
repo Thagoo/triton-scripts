@@ -4,6 +4,12 @@ mkdir -p out
 
 make O=out ARCH=arm64 rolex_defconfig
 
+curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CID" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="build started"
+
 PATH="/tmp/proton/bin:$PATH" \
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
@@ -23,11 +29,6 @@ make -j$(nproc --all) O=out \
 	              HOSTAR=llvm-ar \
 	              HOSTLD=ld.lld 
 
-curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-        -d chat_id="$CID" \
-        -d "disable_web_page_preview=true" \
-        -d "parse_mode=html" \
-        -d text="build started"
 if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
    curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
