@@ -46,4 +46,5 @@ curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument"
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"  \
-	-F caption="#triton #storm #4.9 #Rova #BETA compiled from Proton-Clang-v12 follow @tboxxx for more updates"
+	-F caption="#triton #storm #4.9 #Rova
+Compiler- Proton-Clang-v12 follow @tboxxx for more updates"
