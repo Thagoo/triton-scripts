@@ -36,5 +36,4 @@ RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
 RUN git clone https://github.com/kdrag0n/proton-clang -b master --depth 1 --single-branch -q /tmp/proton
-RUN rm -rf /tmp/proton/.git
-RUN git clone https://github.com/Thagoo/AnyKernel3 -b ts-proton-rova --depth 1 /tmp/AnyKernel3
+RUN rm -rf /tmp/proton/.git 

@@ -1,4 +1,5 @@
 ZIPNAME=Triton-Storm-Rova-$(date +"%S-%F")
+git clone https://github.com/Thagoo/AnyKernel3 -b ts-proton-rova --depth 1 /tmp/AnyKernel3
 
 mkdir -p out
 
