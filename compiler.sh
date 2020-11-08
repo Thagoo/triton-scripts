@@ -5,7 +5,7 @@ mkdir -p out
 
 export KBUILD_BUILD_USER=Thago
 export KBUILD_BUILD_HOST=Drone
-make O=out ARCH=arm64 rolex_defconfig
+make O=out ARCH=arm64 tiare_defconfig
 
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CID" \
