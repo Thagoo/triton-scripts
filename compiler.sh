@@ -1,4 +1,4 @@
-ZIPNAME=Triton-Storm-Rova-$(date +"%S-%F")
+ZIPNAME=tiare-4.9-test-$(date +"%S-%F")
 git clone https://github.com/Thagoo/AnyKernel3 -b ts-proton-rova --depth 1 /tmp/AnyKernel3
 
 mkdir -p out
@@ -46,6 +46,4 @@ zip -r ${ZIPNAME}.zip *
 curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
         -F "disable_web_page_preview=true" \
-        -F "parse_mode=html"  \
-	-F caption="#triton #storm #4.9 #Rova
-Compiler- Proton-Clang-v12 follow @tboxxx for more updates"
+        -F "parse_mode=html"  
