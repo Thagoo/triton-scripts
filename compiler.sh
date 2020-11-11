@@ -32,11 +32,12 @@ make -j$(nproc --all) O=out \
 	              HOSTAR=llvm-ar \
 	              HOSTLD=ld.lld 
 
-if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then    
-   curl -F document=@log.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
-        -F chat_id=${CID} \
-        -F "disable_web_page_preview=true" \
-        -F "parse_mode=html" 
+if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
+	curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CID" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="Build stopped Compilation Error"
            exit 1
 fi
 cp out/arch/arm64/boot/Image.gz-dtb /tmp/AnyKernel3
