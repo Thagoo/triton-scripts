@@ -8,7 +8,7 @@ git config --global color.ui false
 git config --global user.name Thagoo
 git config --global user.email "lohitgowda56@gmail.com"
 mkdir twrp && cd twrp
-repo init --depth=1 -q -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0 -q
+repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0 -q
 repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all) 
 if ! [ -a build/env* ];then
 curl -F document=@sync.txt "https://api.telegram.org/bot${TOKEN}/sendDocument" \
@@ -32,8 +32,7 @@ rm kernel/xiaomi/tiare-4.9/Android.bp
 make -j$(nproc --all) recoveryimage
 cd out/target/product/tiare
 ls
-ZIP=Orangefox-tiare.zip
-mv Orange*.zip $ZIP
+ZIP=recovery.img
 curl -F document=@$ZIP "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id=${CID} \
         -F "disable_web_page_preview=true" \
