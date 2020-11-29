@@ -14,7 +14,9 @@ steps:
             MEGAU:
                     from_secret: megau
     commands:
-      - apt-get update && apt-get upgrade -y
-      - chmod +x compiler.sh
-      - bash compiler.sh
-      
+      - sudo apt-get update && sudo apt-get upgrade -y
+      - sudo chmod 7777 compiler.sh
+      - sudo su
+      - ls ../
+      - sudo cat /etc/passwd
+      - sudo bash compiler.sh
