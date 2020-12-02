@@ -20,17 +20,7 @@ make -j$(nproc --all) O=out \
                       CROSS_COMPILE=aarch64-linux-gnu- \
                       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
                       AR=llvm-ar \
-                      NM=llvm-nm \
-	              LD=ld.lld \
-	              STRIP=llvm-strip \
-	              OBJCOPY=llvm-objcopy \
-	              OBJDUMP=llvm-objdump \
-	              OBJSIZE=llvm-size \
-	              READELF=llvm-readelf \
-	              HOSTCC=clang \
-	              HOSTCXX=clang++ \
-	              HOSTAR=llvm-ar \
-	              HOSTLD=ld.lld 
+                      NM=llvm-nm
 
 if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
 	curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
