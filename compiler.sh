@@ -32,7 +32,7 @@ if ! [ -a "out/arch/arm64/boot/Image.gz-dtb" ]; then
 fi
 cp out/arch/arm64/boot/Image.gz-dtb /tmp/AnyKernel3
 cd /tmp/AnyKernel3
-zip -r ${ZIPNAME}.zip *
+zip -r9 ${ZIPNAME}.zip *
 
 curl -F document=@$ZIPNAME.zip "https://api.telegram.org/bot$TOKEN/sendDocument" \
         -F chat_id=$CID\
