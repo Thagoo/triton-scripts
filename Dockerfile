@@ -26,12 +26,14 @@ RUN apt-get update               \
     xz-utils                     \
     python \
     python3 \
+    python3-pip \
     curl \
     zip \
     flex \
     bison \
     bc
 
+RUN pip3 install datetime telethon python-dotenv GitPython
 RUN git config --global user.name "Thagoo"
 RUN git config --global user.email "lohitgowda56@gmail.com"
 RUN git config --global http.sslVerify false
