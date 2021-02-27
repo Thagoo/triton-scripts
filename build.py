@@ -31,7 +31,7 @@ def Get_AnyK():
 def Cp_Ul():
     """ Copy build output, archive and upload to TG """
     copy(k_out, "AnyKernel3")
-    call('zip temp.zip AnyKernel3/* -r9', shell=True)
+    call('cd AnyKernel3;zip temp.zip * -r9;mv temp.zip ..', shell=True)
     os.rename('temp.zip', zip_name+'.zip')
     # Upload file to Telegram
     client.send_file(CHANNEL_ID, file=zip_name+'.zip', caption="Triton kernel for rolex or riva \nfollow @tboxxx for more updates", force_document=True)
