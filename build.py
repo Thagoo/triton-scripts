@@ -13,7 +13,7 @@ load_dotenv("env")
 
 # Set Additional variables
 now = datetime.now().strftime("%d%m%Y-%M")
-zip_name = "Triton-Storm-Rova-" + now
+zip_name = "Triton-Rova-" + now
 k_out = "out/arch/arm64/boot/Image.gz-dtb"
 anyk_repo_link = "https://github.com/Thagoo/AnyKernel3"
 API_ID = os.environ.get('API_ID')
